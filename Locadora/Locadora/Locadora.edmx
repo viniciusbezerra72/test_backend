@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LocadoraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="clienteId" />
+          </Key>
+          <Property Name="clienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="50" />
+          <Property Name="dtNascimento" Type="date" />
+          <Property Name="CFP" Type="varchar" MaxLength="12" />
+          <Property Name="CEP" Type="varchar" MaxLength="9" />
+          <Property Name="nrLogradouro" Type="varchar" MaxLength="3" />
+          <Property Name="telefone" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Filme">
+          <Key>
+            <PropertyRef Name="filmeId" />
+          </Key>
+          <Property Name="filmeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ano" Type="int" />
+          <Property Name="genero" Type="varchar" MaxLength="15" />
+          <Property Name="ativo" Type="int" />
+        </EntityType>
+        <EntityType Name="Locacao">
+          <Key>
+            <PropertyRef Name="locacaoId" />
+          </Key>
+          <Property Name="locacaoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clienteId" Type="int" />
+          <Property Name="filmeId" Type="nchar" MaxLength="10" />
+          <Property Name="dtLocacao" Type="date" />
+          <Property Name="dtDevolucao" Type="date" />
+        </EntityType>
+        <EntityContainer Name="LocadoraModelStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Filme" EntityType="Self.Filme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locacao" EntityType="Self.Locacao" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LocadoraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="clienteId" />
+          </Key>
+          <Property Name="clienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dtNascimento" Type="DateTime" Precision="0" />
+          <Property Name="CFP" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CEP" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="nrLogradouro" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Filme">
+          <Key>
+            <PropertyRef Name="filmeId" />
+          </Key>
+          <Property Name="filmeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ano" Type="Int32" />
+          <Property Name="genero" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ativo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Locacao">
+          <Key>
+            <PropertyRef Name="locacaoId" />
+          </Key>
+          <Property Name="locacaoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clienteId" Type="Int32" />
+          <Property Name="filmeId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="dtLocacao" Type="DateTime" Precision="0" />
+          <Property Name="dtDevolucao" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="LocadoraEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Filme" EntityType="Self.Filme" />
+          <EntitySet Name="Locacao" EntityType="Self.Locacao" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LocadoraModelStoreContainer" CdmEntityContainer="LocadoraEntities">
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="LocadoraModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="clienteId" ColumnName="clienteId" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="dtNascimento" ColumnName="dtNascimento" />
+                <ScalarProperty Name="CFP" ColumnName="CFP" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="nrLogradouro" ColumnName="nrLogradouro" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Filme">
+            <EntityTypeMapping TypeName="LocadoraModel.Filme">
+              <MappingFragment StoreEntitySet="Filme">
+                <ScalarProperty Name="filmeId" ColumnName="filmeId" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="ano" ColumnName="ano" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locacao">
+            <EntityTypeMapping TypeName="LocadoraModel.Locacao">
+              <MappingFragment StoreEntitySet="Locacao">
+                <ScalarProperty Name="locacaoId" ColumnName="locacaoId" />
+                <ScalarProperty Name="clienteId" ColumnName="clienteId" />
+                <ScalarProperty Name="filmeId" ColumnName="filmeId" />
+                <ScalarProperty Name="dtLocacao" ColumnName="dtLocacao" />
+                <ScalarProperty Name="dtDevolucao" ColumnName="dtDevolucao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
